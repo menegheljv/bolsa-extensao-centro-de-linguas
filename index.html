@@ -40,15 +40,15 @@ p{margin:0 0 var(--s2);text-wrap:pretty;max-width:var(--measure)}
 .nav a:hover,.nav a.on{color:var(--red)}
 
 /* abertura */
-.hero{background:#012a22;color:#fff;overflow:hidden}
+.hero{background:var(--forest);color:#fff;overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s6);align-items:center;padding-top:var(--s7);padding-bottom:var(--s7)}
-.hero .label{color:#e0262b;font-weight:800;font-size:14px;margin-bottom:var(--s3)}
+.hero .label{color:#ee2a30;font-weight:800;font-size:14px;margin-bottom:var(--s3)}
 .hero h1{font-size:clamp(32px,4.4vw,60px)}
-.hero h1 em{font-style:normal;color:#e0262b}
+.hero h1 em{font-style:normal;color:#ee2a30}
 .hero .sub{margin:var(--s4) 0;font-size:20px;color:#d7e6df;max-width:46ch}
 .hero .cta{display:flex;gap:var(--s2);flex-wrap:wrap}
 #heromap{width:100%;height:auto;display:block}
-.stripe{background:var(--forest);color:#fff}
+.stripe{background:var(--forest-dk);color:#fff}
 .stripe .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3);padding-top:var(--s4);padding-bottom:var(--s4)}
 .out{color:transparent;-webkit-text-stroke:2px currentColor}
 .stripe b{display:block;font-size:clamp(48px,6vw,80px);font-weight:800;line-height:1;letter-spacing:-.03em;color:#fff}
@@ -95,8 +95,11 @@ section.tint{background:var(--wash)}
 .modes button{font:600 15px "Open Sans",sans-serif;padding:10px 18px;border:0;border-radius:var(--r-sm);background:var(--wash2);color:var(--ink);cursor:pointer}
 .modes button[aria-pressed="true"]{background:var(--forest);color:#fff}
 #map{width:100%;height:auto;display:block;background:#fff}
-#map path{cursor:pointer;transition:fill .25s}
-#map path:hover{filter:brightness(.94)}
+#map path{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .2s ease}
+#map path:hover{transform:scale(1.06)}
+#map path:focus{outline:none}
+#map path:focus-visible{stroke:#014c3f;stroke-width:5}
+#map:focus{outline:none}
 #map text{pointer-events:none;font-family:"Open Sans",sans-serif;text-anchor:middle}
 .legend{display:flex;align-items:center;gap:var(--s1);margin-top:var(--s2);font-size:13px;color:var(--muted)}
 .legend i{display:block;width:34px;height:12px}
@@ -461,6 +464,8 @@ G.forEach(g=>{
   const d=D[g.cod];
   const p=el('path',{d:g.d,'stroke':'#fff','stroke-width':3,'stroke-linejoin':'round',tabindex:0,role:'button','aria-label':`${d.n}, ${d.tot} alunos`},map);
   p.addEventListener('click',()=>select(g.cod));
+  p.addEventListener('mouseenter',()=>map.appendChild(p));
+  p.addEventListener('mousedown',e=>e.preventDefault());
   p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(g.cod)}});
   paths[g.cod]=p;
   el('title',{},p).textContent=d.n;
