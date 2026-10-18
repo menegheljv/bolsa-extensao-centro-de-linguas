@@ -42,7 +42,7 @@ p{margin:0 0 var(--s2);text-wrap:pretty;max-width:var(--measure)}
 /* abertura */
 .hero{background:var(--forest);color:#fff;overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s6);align-items:center;padding-top:var(--s7);padding-bottom:var(--s7)}
-.hero .label{color:#fff;font-weight:800;font-size:14px;margin-bottom:var(--s3)}
+.hero .label{color:#fff;font-weight:400;font-size:14px;margin-bottom:var(--s3)}
 .hero h1{font-size:clamp(32px,4.4vw,60px)}
 .hero h1 em{font-style:normal;color:#fff}
 .hero .sub{margin:var(--s4) 0;font-size:20px;color:#d7e6df;max-width:46ch}
@@ -96,7 +96,8 @@ section.tint{background:var(--wash)}
 .modes button[aria-pressed="true"]{background:var(--forest);color:#fff}
 #map{width:100%;height:auto;display:block;background:#fff}
 #map path{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .2s ease}
-#map path:hover{transform:scale(1.06)}
+#map .hov{display:none;pointer-events:none;transform-box:fill-box;transform-origin:center;transform:scale(1.07)}
+#map .hov.on{display:block}
 #map path:focus{outline:none}
 #map path:focus-visible{stroke:#014c3f;stroke-width:5}
 #map:focus{outline:none}
@@ -227,7 +228,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
   <div class="wrap">
     <a href="#topo" aria-label="Centro de Línguas Ifes, início"><svg class="logo" role="img" aria-label="Logo do Centro de Línguas"><use href="#logo"/></svg></a>
     <ul>
-      <li><a href="#projeto">Projeto</a></li><li><a href="#plano">Plano</a></li><li><a href="#rede">Rede municipal</a></li><li><a href="#preparatec">Preparatec</a></li><li><a href="#tempo">Linha do tempo</a></li><li><a href="#fontes">Fontes</a></li>
+      <li><a href="#projeto">Projeto</a></li><li><a href="#plano">Plano</a></li><li><a href="#rede">Rede municipal</a></li><li><a href="#capacitacao">Capacitação</a></li><li><a href="#preparatec">Preparatec</a></li><li><a href="#tempo">Linha do tempo</a></li><li><a href="#fontes">Fontes</a></li>
     </ul>
   </div>
 </nav>
@@ -259,6 +260,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
     <header><span class="n">01</span><h2>O projeto</h2></header>
     <div class="rv">
       <p class="lead">O Ifes está implantando um Centro de Línguas com cursos presenciais de inglês e francês para a rede pública. A bolsa cuida do que o aluno vê: o material de aula e a comunicação de cada edital.</p>
+      <p>O projeto também pensa em capacitar professores. O curso de idiomas é para alunos de 8º e 9º ano, mas a capacitação abrange todos os professores da rede municipal, da pré-escola ao 9º ano.</p>
       <p>O projeto se chama “Implantação do Centro de Línguas no IFES - Presidente Kennedy: Qualificação Linguística para o Desenvolvimento Regional” e é coordenado pela Dra. Elisa Prado Có.</p>
       <p>Elisa é professora do Ifes e doutoranda em Educação pela UFES. Pesquisa a internacionalização da educação sob perspectivas críticas e decoloniais, e orientou o trabalho que ficou em 1º lugar na 10ª Mostra de Ciência, Tecnologia e Inovação (JEPE 2022).</p>
       <dl class="ficha">
@@ -328,9 +330,27 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
   </div>
 </section>
 
-<section id="preparatec" class="tint">
+<section id="capacitacao" class="tint">
   <div class="wrap sec">
-    <header><span class="n">04</span><h2>Preparatec</h2></header>
+    <header><span class="n">04</span><h2>Capacitação</h2></header>
+    <div>
+      <p class="lead rv">O curso de idiomas é para alunos de 8º e 9º ano. A capacitação é para todos os professores da rede municipal, inclusive os da pré-escola.</p>
+      <p class="rv">A rede tem 24 escolas municipais e 218 professores ativos no Portal da Transparência (consulta de 17/10/2026). Por etapa de ensino, o Censo Escolar 2025 registra:</p>
+      <ul class="rank rv" id="cap" style="margin-top:var(--s4)">
+        <li><span class="nm">Creche<small>0 a 3 anos</small></span><div class="track"><div class="t8" style="width:47%"></div></div><output>41</output></li>
+        <li class="top"><span class="nm">Pré-escola<small>4 e 5 anos</small></span><div class="track"><div class="t8" style="width:46%"></div></div><output>40</output></li>
+        <li><span class="nm">Anos iniciais<small>1º ao 5º ano</small></span><div class="track"><div class="t8" style="width:70%"></div></div><output>61</output></li>
+        <li><span class="nm">Anos finais<small>6º ao 9º ano</small></span><div class="track"><div class="t8" style="width:100%"></div></div><output>87</output></li>
+      </ul>
+      <p class="src">Fonte: INEP, Microdados do Censo Escolar 2025, tabela de docentes das escolas municipais. Os números são somados por escola e por etapa, então quem atua em mais de uma escola ou etapa é contado em cada uma. O Portal da Transparência lista 218 professores ativos em cargos MAPA e MAPB, sem a disciplina.</p>
+      <div class="open"><b>Professores de inglês</b><p>O Censo 2025 registra 9 nas escolas com 8º e 9º ano. A rede pode ter mais, e o número exato depende da lista da Secretaria Municipal de Educação.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="preparatec">
+  <div class="wrap sec">
+    <header><span class="n">05</span><h2>Preparatec</h2></header>
     <div>
       <p class="lead rv">Projeto da Prefeitura, criado em 2008, que prepara estudantes da rede municipal para o processo seletivo do Ifes. A turma atual reúne 74 alunos: 38 do 8º ano e 36 do 9º.</p>
       <div class="rv">
@@ -347,9 +367,9 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
   </div>
 </section>
 
-<section id="tempo">
+<section id="tempo" class="tint">
   <div class="wrap sec">
-    <header><span class="n">05</span><h2>Linha do tempo</h2></header>
+    <header><span class="n">06</span><h2>Linha do tempo</h2></header>
     <div>
       <p class="lead rv">Do Preparatec ao fim da bolsa, os marcos que ligam a rede municipal ao Centro de Línguas.</p>
       <ol class="tl2 rv" id="tl2"></ol>
@@ -357,9 +377,9 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
   </div>
 </section>
 
-<section id="fontes" class="tint">
+<section id="fontes">
   <div class="wrap sec">
-    <header><span class="n">06</span><h2>Fontes</h2></header>
+    <header><span class="n">07</span><h2>Fontes</h2></header>
     <div>
       
       <ul class="fontes" style="margin-top:0">
@@ -468,12 +488,14 @@ const map=document.getElementById('map');map.setAttribute('viewBox',`-10 -10 ${W
 let mode='tot',sel='320030005';
 const shade=r=>r>.75?'#1f7a30':r>.35?'#5dba6b':r>.17?'#9ad4a3':r>.1?'#c4e5c9':'#e3f2e5';
 const paths={},labs={};
+const hov=el('use',{class:'hov'},map);
 G.forEach(g=>{
   const d=D[g.cod];
   const p=el('path',{d:g.d,'stroke':'#fff','stroke-width':3,'stroke-linejoin':'round',tabindex:0,role:'button','aria-label':`${d.n}, ${d.tot} alunos`},map);
   p.addEventListener('click',()=>select(g.cod));
-  p.addEventListener('mouseenter',()=>map.appendChild(p));
-  p.addEventListener('mousedown',e=>e.preventDefault());
+  p.id='d'+g.cod;
+  p.addEventListener('mouseenter',()=>{hov.setAttribute('href','#d'+g.cod);hov.classList.add('on');map.appendChild(hov)});
+  p.addEventListener('mouseleave',()=>hov.classList.remove('on'));
   p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(g.cod)}});
   paths[g.cod]=p;
   el('title',{},p).textContent=d.n;
@@ -488,7 +510,7 @@ function paint(){
     paths[g.cod].setAttribute('stroke-width',3);
     p_title(g.cod,d);
   });
-  const sp=paths[sel];map.appendChild(sp);
+  const sp=paths[sel];map.appendChild(sp);map.appendChild(hov);
 }
 function panel(){
   const d=D[sel],tot=d.tot,max=56+56;
