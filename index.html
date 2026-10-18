@@ -452,9 +452,15 @@ const NS='http://www.w3.org/2000/svg';
 const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
 const G=BOUNDARY.features.map(f=>({cod:f.properties.cod,...geom(f)}));
 
-/* mapa de abertura */
+/* mapa de abertura: mapa branco, divisas vermelhas só por dentro */
 (()=>{const s=document.getElementById('heromap');s.setAttribute('viewBox',`-10 -10 ${W+20} ${H+20}`);
-  G.forEach(g=>el('path',{d:g.d,fill:'#fff',stroke:'#e53238','stroke-width':4,'stroke-linejoin':'round'},s));
+  const defs=el('defs',{},s);
+  const f=el('filter',{id:'er',x:'-5%',y:'-5%',width:'110%',height:'110%'},defs);el('feMorphology',{operator:'erode',radius:4},f);
+  const m=el('mask',{id:'hm',maskUnits:'userSpaceOnUse',x:-10,y:-10,width:W+20,height:H+20},defs);
+  const mg=el('g',{filter:'url(#er)'},m);
+  G.forEach(g=>{el('path',{d:g.d,fill:'#fff'},s);el('path',{d:g.d,fill:'#fff'},mg)});
+  const rg=el('g',{mask:'url(#hm)'},s);
+  G.forEach(g=>el('path',{d:g.d,fill:'none',stroke:'#e53238','stroke-width':5,'stroke-linejoin':'round'},rg));
 })();
 
 /* mapa interativo */
