@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bolsa de Extensão, Centro de Línguas Ifes</title>
+<meta name="description" content="Repositório da bolsa de extensão tecnológica FAPES do Centro de Línguas do Ifes, sob mentoria da Dra. Elisa Prado Có: plano, metas e contexto da rede municipal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314315c'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%23f2b84b' font-family='Georgia' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{
+  --ink:#14233d; --muted:#51607a; --bg:#fbf8f2; --card:#ffffff; --line:#e3ddd0;
+  --navy:#14315c; --amber:#f2b84b; --amber-d:#8a5a00; --teal:#1f7a74;
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:72px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--navy)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0;text-wrap:balance}
+p{text-wrap:pretty;margin:0 0 var(--s2)}
+header.top{background:var(--navy);color:#fff}
+.nav{display:flex;gap:var(--s3);flex-wrap:wrap;padding:14px 0;font-size:14px}
+.nav a{color:#cdd8ec;text-decoration:none}
+.nav a:hover{color:#fff}
+.hero{padding:var(--s4) 0 var(--s5)}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:var(--s2)}
+.hero h1{font-size:clamp(34px,6vw,58px);max-width:18ch}
+.hero p{color:#dbe4f5;max-width:56ch;margin-top:var(--s3);font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--s3)}
+.chip{border:1px solid #3d5a8c;border-radius:999px;padding:6px 14px;font-size:14px;color:#e8eefb}
+section{padding:var(--s5) 0 0}
+section h2{font-size:clamp(28px,4vw,38px);margin-bottom:var(--s2)}
+.lead{color:var(--muted);max-width:62ch;margin-bottom:var(--s3)}
+.grid{display:grid;gap:var(--s2);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-size:20px;margin-bottom:var(--s1)}
+.card p{color:var(--muted);margin:0;font-size:16px}
+.tag{display:inline-block;font:600 12px Inter;letter-spacing:.08em;color:var(--amber-d);background:#fdf0d3;border-radius:6px;padding:3px 8px;margin-bottom:12px}
+.stats{display:grid;gap:var(--s2);grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:var(--s3) 0}
+.stat{background:var(--navy);color:#fff;border-radius:14px;padding:20px}
+.stat b{display:block;font:700 40px/1 Fraunces,serif;color:var(--amber)}
+.stat span{font-size:14px;color:#cdd8ec}
+#map{height:460px;border-radius:14px;border:1px solid var(--line);margin:var(--s3) 0 var(--s1)}
+.note{font-size:14px;color:var(--muted)}
+.bars{display:grid;gap:12px;margin-top:var(--s3)}
+.row{display:grid;grid-template-columns:minmax(150px,230px) 1fr 44px;gap:12px;align-items:center;font-size:15px}
+.track{height:22px;background:#ece6d8;border-radius:6px;display:flex;overflow:hidden}
+.b8{background:var(--navy)} .b9{background:var(--teal)}
+.row output{text-align:right;font-weight:600}
+.legend{display:flex;gap:18px;font-size:14px;color:var(--muted);margin-top:var(--s2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.n,th.n{text-align:right}
+.callout{border-left:4px solid var(--amber);background:#fff;border-radius:0 14px 14px 0;padding:20px 24px;margin-top:var(--s3)}
+.callout h3{font-size:21px;margin-bottom:8px}
+.pending{border:1.5px dashed #b9b09b;border-radius:14px;padding:20px 24px;margin-top:var(--s3);color:var(--muted);background:transparent}
+ul.clean{margin:0;padding-left:20px} ul.clean li{margin-bottom:8px}
+.timeline{display:grid;gap:var(--s2);grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:var(--s3)}
+.src{font-size:14px;color:var(--muted);margin-top:var(--s2)}
+footer{margin-top:var(--s5);background:var(--navy);color:#cdd8ec;padding:var(--s4) 0;font-size:14px}
+footer a{color:#fff}
+.quote{font:600 clamp(22px,3vw,28px)/1.3 Fraunces,serif;max-width:28ch;margin-top:var(--s3);color:var(--navy)}
+@media (max-width:640px){
+  .row{grid-template-columns:1fr 44px}
+  .row .track{grid-column:1 / -1;order:3}
+  #map{height:380px}
+  .scroll{overflow-x:auto}
+  table{min-width:520px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <nav class="nav" aria-label="Seções">
+      <a href="#projeto">Projeto</a><a href="#plano">Plano da bolsa</a><a href="#rede">Rede municipal</a><a href="#preparatec">Preparatec</a><a href="#fontes">Fontes</a>
+    </nav>
+    <div class="hero">
+      <div class="eyebrow">Bolsa de Extensão Tecnológica · FAPES</div>
+      <h1>Materiais e comunicação para o Centro de Línguas do Ifes</h1>
+      <p>Repositório de acompanhamento da bolsa de João Victor Meneghel, sob mentoria da Dra. Elisa Prado Có, com foco inicial em alunos de 8º e 9º ano da rede municipal.</p>
+      <div class="chips"><span class="chip">Edital FAPES 04/2025</span><span class="chip">01/10/2026 a 31/10/2027</span><span class="chip">13 cotas</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<section id="projeto">
+  <h2>O projeto</h2>
+  <p class="lead">A bolsa apoia o projeto “Implantação do Centro de Línguas no IFES - Presidente Kennedy: Qualificação Linguística para o Desenvolvimento Regional”, coordenado pela Dra. Elisa Prado Có, com vigência de 01/12/2025 a 30/11/2027.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">ORIENTAÇÃO</span><h3>Dra. Elisa Prado Có</h3><p>Professora do Ifes, doutoranda em Educação pela UFES. Pesquisa internacionalização da educação, com perspectivas críticas e decoloniais, e formação de professores.</p></div>
+    <div class="card"><span class="tag">BOLSISTA</span><h3>João Victor Meneghel</h3><p>Bolsista de Extensão Tecnológica (FAPES, SIGFAPES). Plano: produção de materiais didáticos e ações de comunicação para o Centro de Línguas.</p></div>
+    <div class="card"><span class="tag">OBJETIVO</span><h3>Democratizar o ensino de idiomas</h3><p>Cursos presenciais de inglês e francês para a rede pública, com materiais próprios e divulgação a cada edital semestral.</p></div>
+  </div>
+  <p class="quote">“A educação é um ato de amor, por isso, um ato de coragem.”</p>
+  <p class="note">Paulo Freire</p>
+</section>
+
+<section id="plano">
+  <h2>Plano da bolsa</h2>
+  <p class="lead">Cinco frentes de atividade, com metas verificáveis ao longo de 13 meses.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">A.1</span><h3>Materiais didáticos</h3><p>Material diagramado (Canva ou similar) para os cursos presenciais de inglês e francês.</p></div>
+    <div class="card"><span class="tag">A.2</span><h3>Divulgação</h3><p>Peças de comunicação a cada edital semestral.</p></div>
+    <div class="card"><span class="tag">A.3</span><h3>Atendimento</h3><p>Atendimento ao público e apoio às inscrições.</p></div>
+    <div class="card"><span class="tag">A.4</span><h3>Documentação</h3><p>Organização de documentos e registros do centro.</p></div>
+    <div class="card"><span class="tag">A.5</span><h3>Apoio pedagógico</h3><p>Apoio em sala e no ambiente virtual de aprendizagem.</p></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>4</b><span>turmas com material diagramado</span></div>
+    <div class="stat"><b>2</b><span>editais apoiados</span></div>
+    <div class="stat"><b>4+4</b><span>peças e ações da biblioteca especializada</span></div>
+    <div class="stat"><b>12</b><span>relatórios mensais e apoio ao final</span></div>
+  </div>
+</section>
+
+<section id="rede">
+  <h2>Rede municipal de Alfredo Chaves</h2>
+  <p class="lead">Ponto de partida para o foco em 8º e 9º ano: onde estão as escolas e quantos alunos cada uma tem nessas séries.</p>
+  <div class="stats">
+    <div class="stat"><b>240</b><span>alunos de 8º e 9º ano na rede municipal</span></div>
+    <div class="stat"><b>118 · 122</b><span>no 8º ano · no 9º ano</span></div>
+    <div class="stat"><b>8</b><span>escolas municipais com essas séries</span></div>
+    <div class="stat"><b>47%</b><span>dos alunos estão em uma única escola</span></div>
+  </div>
+  <div id="map" role="application" aria-label="Mapa das escolas municipais de Alfredo Chaves"></div>
+  <p class="note">A posição de cada marcador é aproximada: usa a localidade informada no cadastro da escola, não o endereço exato. O tamanho do círculo é proporcional aos alunos de 8º e 9º ano.</p>
+
+  <h3 style="margin-top:var(--s4);font-size:24px">Alunos por escola</h3>
+  <div class="bars" id="bars"></div>
+  <div class="legend"><span><i class="b8"></i>8º ano</span><span><i class="b9"></i>9º ano</span></div>
+
+  <div class="scroll" style="margin-top:var(--s3)"><table>
+    <thead><tr><th>Escola</th><th>Localidade</th><th class="n">8º</th><th class="n">9º</th><th class="n">Total</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table></div>
+  <p class="src">Fonte: INEP, Microdados do Censo Escolar 2024 (escolas municipais em funcionamento, município 3200300). Matrículas por série, campos QT_MAT_FUND_AF_8 e QT_MAT_FUND_AF_9.</p>
+
+  <div class="pending"><b>Professores de inglês: em levantamento.</b> O arquivo de escolas do Censo traz só o total de docentes dos anos finais. A contagem de quem leciona inglês depende dos microdados de docentes ou de lista da Secretaria Municipal de Educação.</div>
+</section>
+
+<section id="preparatec">
+  <h2>Preparatec</h2>
+  <p class="lead">Iniciativa da Prefeitura, criada em 2008, que prepara estudantes da rede municipal para o processo seletivo do Ifes.</p>
+  <div class="stats">
+    <div class="stat"><b>74</b><span>estudantes na turma atual</span></div>
+    <div class="stat"><b>38 · 36</b><span>no 8º ano · no 9º ano</span></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>9º ano</h3><p>Língua Portuguesa, Matemática, História, Geografia, Biologia, Química e Física.</p></div>
+    <div class="card"><h3>8º ano</h3><p>Reforço principalmente de Português e Matemática.</p></div>
+    <div class="card"><h3>Local e coordenação</h3><p>Aulas na EMEF Ana Araújo. Coordenação da pedagoga Martha Ferreira Ragazzi.</p></div>
+  </div>
+  <div class="callout">
+    <h3>Uma pergunta em aberto para o Centro de Línguas</h3>
+    <p style="margin:0;color:var(--muted)">A lista de disciplinas divulgada não inclui inglês. Se isso se confirmar, é um espaço natural para o centro atuar com esses mesmos alunos. A hipótese precisa ser validada com a coordenação do Preparatec.</p>
+  </div>
+  <p class="src">Fonte: postagem da Revista Conexão sobre o Preparatec (imprensa, não documento oficial; a data de publicação deve ser conferida). Os 240 alunos do Censo são de 2024, então a proporção entre os dois números é só uma estimativa. Números oficiais devem ser pedidos à Secretaria Municipal de Educação.</p>
+</section>
+
+<section id="fontes">
+  <h2>Fontes e transparência</h2>
+  <ul class="clean">
+    <li><a href="https://download.inep.gov.br/dados_abertos/microdados_censo_escolar_2024.zip">INEP, Microdados do Censo Escolar 2024</a> (matrículas por escola).</li>
+    <li><a href="https://servicodados.ibge.gov.br/api/docs/malhas?versao=3">IBGE, Malhas Geográficas</a> (limite do município).</li>
+    <li><a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> e <a href="https://nominatim.org/">Nominatim</a> (mapa base e localização aproximada das localidades).</li>
+    <li>Revista Conexão (postagem sobre o Preparatec).</li>
+    <li>Plano de trabalho da bolsa, Edital FAPES 04/2025, SIGFAPES.</li>
+  </ul>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Bolsa de Extensão Tecnológica FAPES · Edital 04/2025 · Mentoria da Dra. Elisa Prado Có · Ifes. Este site é um repositório de acompanhamento e não é canal oficial da instituição.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const SCHOOLS = [
+  {n:"EMEF Ana Araújo", loc:"Centro", a:56, b:56, ll:[-20.6351,-40.7494]},
+  {n:"EMEF Felipe Modolo", loc:"Matilde", a:24, b:18, ll:[-20.5530,-40.8141]},
+  {n:"EMEF Engano", loc:"Ibitirui", a:11, b:10, ll:[-20.6014,-40.8593]},
+  {n:"EMEF São Bento de Urânia", loc:"São Bento de Urânia", a:6, b:15, ll:[-20.4714,-40.9179]},
+  {n:"EMEF Fazenda Aparecida", loc:"Ribeirão do Cristo", a:8, b:7, ll:[-20.4944,-40.7376]},
+  {n:"EMEF Sagrada Família", loc:"Sagrada Família", a:5, b:7, ll:[-20.5789,-40.6985]},
+  {n:"EMEF Celita Bastos Garcia", loc:"São João de Crubixá", a:3, b:8, ll:[-20.6415,-40.8677], shift:[0.004,0.006]},
+  {n:"EMEF Crubixa", loc:"São João de Crubixá", a:5, b:1, ll:[-20.6415,-40.8677], shift:[-0.004,-0.006]}
+].sort((x,y)=>(y.a+y.b)-(x.a+x.b));
+const BOUNDARY = {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-40.6561,-20.4602],[-40.6603,-20.4501],[-40.6736,-20.4501],[-40.685,-20.4406],[-40.6884,-20.4344],[-40.7047,-20.4349],[-40.7144,-20.4411],[-40.7085,-20.4471],[-40.7114,-20.46],[-40.7231,-20.4582],[-40.7355,-20.4704],[-40.7433,-20.4848],[-40.7538,-20.4985],[-40.7789,-20.4977],[-40.7826,-20.5066],[-40.793,-20.5077],[-40.7981,-20.5143],[-40.8089,-20.5213],[-40.8218,-20.5182],[-40.8174,-20.5088],[-40.8096,-20.4999],[-40.8084,-20.487],[-40.8164,-20.4835],[-40.8225,-20.4887],[-40.8279,-20.4849],[-40.8365,-20.4882],[-40.8414,-20.4849],[-40.8552,-20.4918],[-40.8613,-20.4886],[-40.8679,-20.4781],[-40.8696,-20.4649],[-40.884,-20.4629],[-40.8943,-20.4642],[-40.902,-20.4619],[-40.9124,-20.4487],[-40.93,-20.4369],[-40.9477,-20.4392],[-40.9627,-20.4341],[-40.9881,-20.4368],[-40.9848,-20.4483],[-40.9871,-20.4582],[-40.9776,-20.456],[-40.9689,-20.4626],[-40.9724,-20.4807],[-40.9659,-20.4836],[-40.9689,-20.4963],[-40.9598,-20.4975],[-40.9585,-20.5089],[-40.9621,-20.5381],[-40.9662,-20.5425],[-40.9568,-20.5528],[-40.9566,-20.5617],[-40.9671,-20.5645],[-40.9683,-20.5764],[-40.9576,-20.5905],[-40.9589,-20.5985],[-40.945,-20.6063],[-40.9363,-20.5996],[-40.9292,-20.6068],[-40.9226,-20.6083],[-40.9102,-20.6185],[-40.9108,-20.6335],[-40.9158,-20.6439],[-40.9256,-20.6477],[-40.9264,-20.6533],[-40.9342,-20.6628],[-40.9336,-20.6734],[-40.9297,-20.6782],[-40.9223,-20.6765],[-40.9206,-20.6835],[-40.9099,-20.6859],[-40.8969,-20.6778],[-40.8883,-20.676],[-40.8821,-20.6704],[-40.8644,-20.6788],[-40.8558,-20.6856],[-40.8386,-20.6876],[-40.8394,-20.6779],[-40.8081,-20.6932],[-40.7982,-20.6953],[-40.7843,-20.703],[-40.7708,-20.7055],[-40.768,-20.6995],[-40.7708,-20.6912],[-40.7703,-20.6772],[-40.7592,-20.658],[-40.7443,-20.6582],[-40.7473,-20.6516],[-40.7435,-20.6469],[-40.7275,-20.6467],[-40.7258,-20.6347],[-40.7166,-20.6262],[-40.7112,-20.6143],[-40.6902,-20.6053],[-40.6853,-20.5993],[-40.6721,-20.5948],[-40.6712,-20.58],[-40.6838,-20.576],[-40.6843,-20.566],[-40.6805,-20.5572],[-40.672,-20.5531],[-40.673,-20.5448],[-40.6877,-20.5394],[-40.7022,-20.5366],[-40.7003,-20.5272],[-40.6935,-20.5262],[-40.6952,-20.5052],[-40.6913,-20.4988],[-40.6847,-20.4998],[-40.6748,-20.4793],[-40.6771,-20.4687],[-40.6561,-20.4602]]]},"properties":{"codarea":"3200300"}}]};
+
+const max = Math.max(...SCHOOLS.map(s=>s.a+s.b));
+document.getElementById('bars').innerHTML = SCHOOLS.map(s=>{
+  const t=s.a+s.b;
+  return `<div class="row"><span>${s.n}</span><div class="track" title="${s.a} no 8º, ${s.b} no 9º"><div class="b8" style="width:${s.a/max*100}%"></div><div class="b9" style="width:${s.b/max*100}%"></div></div><output>${t}</output></div>`;
+}).join('');
+document.getElementById('tbody').innerHTML = SCHOOLS.map(s=>`<tr><td>${s.n}</td><td>${s.loc}</td><td class="n">${s.a}</td><td class="n">${s.b}</td><td class="n"><b>${s.a+s.b}</b></td></tr>`).join('')
+ + `<tr><td><b>Total</b></td><td></td><td class="n"><b>118</b></td><td class="n"><b>122</b></td><td class="n"><b>240</b></td></tr>`;
+
+try{
+  const map = L.map('map',{scrollWheelZoom:false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenStreetMap | Limite: IBGE | Dados: INEP 2024'}).addTo(map);
+  const b = L.geoJSON(BOUNDARY,{style:{color:'#14315c',weight:2,fillColor:'#f2b84b',fillOpacity:.08,dashArray:'6 4'}}).addTo(map);
+  map.fitBounds(b.getBounds(),{padding:[10,10]});
+  SCHOOLS.forEach(s=>{
+    const t=s.a+s.b, ll=[s.ll[0]+(s.shift?s.shift[0]:0), s.ll[1]+(s.shift?s.shift[1]:0)];
+    L.circleMarker(ll,{radius:7+Math.sqrt(t)*1.9,color:'#fff',weight:2,fillColor:s.n.includes('Ana Ara')?'#1f7a74':'#14315c',fillOpacity:.85})
+      .bindPopup(`<b>${s.n}</b><br>${s.loc}<br>8º ano: ${s.a} · 9º ano: ${s.b}<br><b>${t} alunos</b>${s.n.includes('Ana Ara')?'<br>Sede das aulas do Preparatec':''}`)
+      .bindTooltip(`${s.n}: ${t}`).addTo(map);
+  });
+  const refit=()=>{map.invalidateSize();map.fitBounds(b.getBounds(),{padding:[10,10]})};
+  window.addEventListener('resize',refit); window.addEventListener('load',refit);
+  map.on('focus',()=>map.scrollWheelZoom.enable()); map.on('blur',()=>map.scrollWheelZoom.disable());
+}catch(e){document.getElementById('map').innerHTML='<p style="padding:24px">Não foi possível carregar o mapa. A tabela abaixo traz os mesmos dados.</p>'}
+</script>
+</body>
+</html>
