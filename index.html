@@ -96,7 +96,7 @@ section.tint{background:var(--wash)}
 .modes button[aria-pressed="true"]{background:var(--forest);color:#fff}
 #map{width:100%;height:auto;display:block;background:#fff}
 #map path{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .2s ease}
-#map .hov{opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center;transform:scale(1);transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
+#map .hov{filter:drop-shadow(0 6px 10px rgba(0,0,0,.28));opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center;transform:scale(1);transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
 #map .hov.on{opacity:1;transform:scale(1.06)}
 @media (prefers-reduced-motion:reduce){#map .hov{transition:none}}
 #map path:focus{outline:none}
@@ -168,6 +168,20 @@ section.tint .tl li{background:#fff}
 .tl2 p{margin:4px 0 0;font-size:17px;color:var(--muted);max-width:52ch}
 .tl2 li.hoje p{color:var(--ink);font-weight:600}
 
+
+/* capacitação */
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);margin:var(--s4) 0}
+.nums b{display:block;font-size:72px;font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--forest)}
+.nums span{display:block;margin-top:var(--s1);font-size:15px;color:var(--muted);max-width:22ch}
+.cap-t{width:100%;border-collapse:separate;border-spacing:0 6px;margin-top:var(--s3);font-size:16px}
+.cap-t th{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 var(--s2)}
+.cap-t td{background:#fff;padding:12px var(--s2);font-weight:600}
+.cap-t td:first-child{border-radius:var(--r) 0 0 var(--r)}
+.cap-t td:last-child{border-radius:0 var(--r) var(--r) 0}
+.cap-t small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.cap-t .n{text-align:right;font-variant-numeric:tabular-nums}
+.cap-t td.n{font-weight:800;font-size:18px}
+
 /* pendências */
 .todo{list-style:none;margin:var(--s4) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
 .todo li{padding:var(--s3);background:var(--wash)}
@@ -202,6 +216,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
   .rank li{grid-template-columns:1fr 44px}
   .rank .track{grid-column:1 / -1;order:3}
   .dots{grid-template-columns:repeat(20,1fr)}
+  .nums{grid-template-columns:1fr}
   .nav ul{display:none}
   .nav .wrap{justify-content:flex-start}
 }
@@ -335,20 +350,26 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
     <header><span class="n">04</span><h2>Capacitação</h2></header>
     <div>
       <p class="lead rv">O curso de idiomas é para alunos de 8º e 9º ano. A capacitação é para todos os professores de inglês.</p>
-      <div class="rv">
-        <p>O Censo Escolar 2025 registra 9 professores de inglês nas escolas municipais, em 8 escolas. Somando as 2 da rede estadual (EEEFM Camila Motta), a rede pública do município chega a 11.</p>
+      <div class="nums rv">
+        <div><b>9</b><span>professores de inglês nas escolas municipais</span></div>
+        <div><b>45</b><span>turmas com aula de inglês nessas escolas</span></div>
+        <div><b>11</b><span>na rede pública, com os 2 da rede estadual</span></div>
       </div>
-      <ul class="rank rv" id="cap" style="margin-top:var(--s4)">
-        <li class="top"><span class="nm">EMEIEF Engano<small>Ibitiruí</small></span><div class="track"><div class="t8" style="width:100%"></div></div><output>2</output></li>
-        <li><span class="nm">EMEF Ana Araújo<small>Sede</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-        <li><span class="nm">EMEIEF Crubixá<small>Crubixá</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-        <li><span class="nm">EMEIEF Felipe Módolo<small>Matilde</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-        <li><span class="nm">EMEIEF Fazenda Aparecida<small>Ribeirão do Cristo</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-        <li><span class="nm">EMEFTI Sagrada Família<small>Sagrada Família</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-        <li><span class="nm">EMEIEF São Bento de Urânia<small>São Bento de Urânia</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-        <li><span class="nm">EMEF Celita Bastos Garcia<small>Crubixá, escola extinta</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
-      </ul>
-      <p class="src">Fonte: INEP, Microdados do Censo Escolar 2025, tabela de docentes (campo QT_DOC_BAS_DISC_LINGUA_ING). A contagem é por escola e não identifica pessoas. Quem atua em mais de uma escola aparece em cada uma, então o número exato de pessoas depende da lista da Secretaria Municipal de Educação.</p>
+      <p class="rv">A maioria das escolas tem só 1 professor porque são escolas pequenas: ele dá inglês para todas as turmas. Na Ana Araújo, por exemplo, 1 professor atende 13 turmas.</p>
+      <table class="cap-t rv">
+        <thead><tr><th>Escola</th><th class="n">Professores</th><th class="n">Turmas com inglês</th></tr></thead>
+        <tbody>
+          <tr><td>EMEF Ana Araújo<small>Sede</small></td><td class="n">1</td><td class="n">13</td></tr>
+          <tr><td>EMEIEF Crubixá<small>Crubixá</small></td><td class="n">1</td><td class="n">8</td></tr>
+          <tr><td>EMEFTI Sagrada Família<small>Sagrada Família</small></td><td class="n">1</td><td class="n">7</td></tr>
+          <tr><td>EMEIEF Engano<small>Ibitiruí</small></td><td class="n">2</td><td class="n">4</td></tr>
+          <tr><td>EMEIEF Felipe Módolo<small>Matilde</small></td><td class="n">1</td><td class="n">4</td></tr>
+          <tr><td>EMEIEF São Bento de Urânia<small>São Bento de Urânia</small></td><td class="n">1</td><td class="n">4</td></tr>
+          <tr><td>EMEIEF Fazenda Aparecida<small>Ribeirão do Cristo</small></td><td class="n">1</td><td class="n">3</td></tr>
+          <tr><td>EMEF Celita Bastos Garcia<small>Crubixá, escola extinta</small></td><td class="n">1</td><td class="n">2</td></tr>
+        </tbody>
+      </table>
+      <p class="src">Fonte: INEP, Microdados do Censo Escolar 2025, tabela de docentes (campo QT_DOC_BAS_DISC_LINGUA_ING) e de turmas (QT_TUR_BAS_DISC_LINGUA_ING). A contagem é por escola e não identifica pessoas. Quem atua em mais de uma escola aparece em cada uma, então o número exato de pessoas depende da lista da Secretaria Municipal de Educação.</p>
     </div>
   </div>
 </section>
@@ -493,13 +514,13 @@ const map=document.getElementById('map');map.setAttribute('viewBox',`-10 -10 ${W
 let mode='tot',sel='320030005';
 const shade=r=>r>.75?'#1f7a30':r>.35?'#5dba6b':r>.17?'#9ad4a3':r>.1?'#c4e5c9':'#e3f2e5';
 const paths={},labs={};
-const hov=el('use',{class:'hov'},map);
+const hov=el('path',{class:'hov',stroke:'none'},map);
 G.forEach(g=>{
   const d=D[g.cod];
   const p=el('path',{d:g.d,'stroke':'#fff','stroke-width':3,'stroke-linejoin':'round',tabindex:0,role:'button','aria-label':`${d.n}, ${d.tot} alunos`},map);
   p.addEventListener('click',()=>select(g.cod));
   p.id='d'+g.cod;
-  p.addEventListener('mouseenter',()=>{hov.classList.remove('on');hov.setAttribute('href','#d'+g.cod);map.appendChild(hov);void hov.getBoundingClientRect();hov.classList.add('on')});
+  p.addEventListener('mouseenter',()=>{hov.classList.remove('on');hov.dataset.cod=g.cod;hov.setAttribute('d',g.d);hov.setAttribute('fill',p.getAttribute('fill'));map.appendChild(hov);void hov.getBoundingClientRect();hov.classList.add('on')});
   p.addEventListener('mouseleave',()=>hov.classList.remove('on'));
   p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(g.cod)}});
   paths[g.cod]=p;
@@ -515,7 +536,7 @@ function paint(){
     paths[g.cod].setAttribute('stroke-width',3);
     p_title(g.cod,d);
   });
-  const sp=paths[sel];map.appendChild(sp);map.appendChild(hov);
+  const sp=paths[sel];map.appendChild(sp);if(hov.dataset.cod)hov.setAttribute('fill',paths[hov.dataset.cod].getAttribute('fill'));map.appendChild(hov);
 }
 function panel(){
   const d=D[sel],tot=d.tot,max=56+56;
