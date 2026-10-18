@@ -96,8 +96,9 @@ section.tint{background:var(--wash)}
 .modes button[aria-pressed="true"]{background:var(--forest);color:#fff}
 #map{width:100%;height:auto;display:block;background:#fff}
 #map path{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transform-box:fill-box;transform-origin:center;transition:fill .25s,transform .2s ease}
-#map .hov{display:none;pointer-events:none;transform-box:fill-box;transform-origin:center;transform:scale(1.07)}
-#map .hov.on{display:block}
+#map .hov{opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center;transform:scale(1);transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
+#map .hov.on{opacity:1;transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){#map .hov{transition:none}}
 #map path:focus{outline:none}
 #map path:focus-visible{stroke:#014c3f;stroke-width:5}
 #map:focus{outline:none}
@@ -260,7 +261,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
     <header><span class="n">01</span><h2>O projeto</h2></header>
     <div class="rv">
       <p class="lead">O Ifes está implantando um Centro de Línguas com cursos presenciais de inglês e francês para a rede pública. A bolsa cuida do que o aluno vê: o material de aula e a comunicação de cada edital.</p>
-      <p>O projeto também pensa em capacitar professores. O curso de idiomas é para alunos de 8º e 9º ano, mas a capacitação abrange todos os professores da rede municipal, da pré-escola ao 9º ano.</p>
+      <p>O projeto também pensa em capacitar professores. O curso de idiomas é para alunos de 8º e 9º ano, e a capacitação é para todos os professores de inglês.</p>
       <p>O projeto se chama “Implantação do Centro de Línguas no IFES - Presidente Kennedy: Qualificação Linguística para o Desenvolvimento Regional” e é coordenado pela Dra. Elisa Prado Có.</p>
       <p>Elisa é professora do Ifes e doutoranda em Educação pela UFES. Pesquisa a internacionalização da educação sob perspectivas críticas e decoloniais, e orientou o trabalho que ficou em 1º lugar na 10ª Mostra de Ciência, Tecnologia e Inovação (JEPE 2022).</p>
       <dl class="ficha">
@@ -326,7 +327,6 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
     <ul class="rank" id="rank"></ul>
     <div class="leg"><span><i style="background:var(--green)"></i>8º ano</span><span><i style="background:var(--forest)"></i>9º ano</span></div>
     <p class="src">Fonte: INEP, Microdados do Censo Escolar 2025 (tabelas de matrículas e de docentes; escolas municipais, município 3200300). Conferido com a Sinopse do Censo Escolar no <a href="https://cidades.ibge.gov.br/brasil/es/alfredo-chaves/pesquisa/13/78117">IBGE Cidades</a>: 127 alunos no 8º ano e 113 no 9º em 2025 (em 2024 eram 118 e 122, também 240 no total).</p>
-    <div class="open"><b>Até 9 professores de inglês nessas escolas</b><p>Engano tem 2 e cada uma das outras sete escolas tem 1 (Censo Escolar 2025). O Censo conta por escola e não identifica as pessoas, então quem atua em mais de uma escola aparece repetido. O número exato de pessoas depende da lista da Secretaria Municipal de Educação.</p></div>
   </div>
 </section>
 
@@ -334,16 +334,21 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
   <div class="wrap sec">
     <header><span class="n">04</span><h2>Capacitação</h2></header>
     <div>
-      <p class="lead rv">O curso de idiomas é para alunos de 8º e 9º ano. A capacitação é para todos os professores da rede municipal, inclusive os da pré-escola.</p>
-      <p class="rv">A rede tem 24 escolas municipais e 218 professores ativos no Portal da Transparência (consulta de 17/10/2026). Por etapa de ensino, o Censo Escolar 2025 registra:</p>
+      <p class="lead rv">O curso de idiomas é para alunos de 8º e 9º ano. A capacitação é para todos os professores de inglês.</p>
+      <div class="rv">
+        <p>O Censo Escolar 2025 registra 9 professores de inglês nas escolas municipais, em 8 escolas. Somando as 2 da rede estadual (EEEFM Camila Motta), a rede pública do município chega a 11.</p>
+      </div>
       <ul class="rank rv" id="cap" style="margin-top:var(--s4)">
-        <li><span class="nm">Creche<small>0 a 3 anos</small></span><div class="track"><div class="t8" style="width:47%"></div></div><output>41</output></li>
-        <li class="top"><span class="nm">Pré-escola<small>4 e 5 anos</small></span><div class="track"><div class="t8" style="width:46%"></div></div><output>40</output></li>
-        <li><span class="nm">Anos iniciais<small>1º ao 5º ano</small></span><div class="track"><div class="t8" style="width:70%"></div></div><output>61</output></li>
-        <li><span class="nm">Anos finais<small>6º ao 9º ano</small></span><div class="track"><div class="t8" style="width:100%"></div></div><output>87</output></li>
+        <li class="top"><span class="nm">EMEIEF Engano<small>Ibitiruí</small></span><div class="track"><div class="t8" style="width:100%"></div></div><output>2</output></li>
+        <li><span class="nm">EMEF Ana Araújo<small>Sede</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
+        <li><span class="nm">EMEIEF Crubixá<small>Crubixá</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
+        <li><span class="nm">EMEIEF Felipe Módolo<small>Matilde</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
+        <li><span class="nm">EMEIEF Fazenda Aparecida<small>Ribeirão do Cristo</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
+        <li><span class="nm">EMEFTI Sagrada Família<small>Sagrada Família</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
+        <li><span class="nm">EMEIEF São Bento de Urânia<small>São Bento de Urânia</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
+        <li><span class="nm">EMEF Celita Bastos Garcia<small>Crubixá, escola extinta</small></span><div class="track"><div class="t8" style="width:50%"></div></div><output>1</output></li>
       </ul>
-      <p class="src">Fonte: INEP, Microdados do Censo Escolar 2025, tabela de docentes das escolas municipais. Os números são somados por escola e por etapa, então quem atua em mais de uma escola ou etapa é contado em cada uma. O Portal da Transparência lista 218 professores ativos em cargos MAPA e MAPB, sem a disciplina.</p>
-      <div class="open"><b>Professores de inglês</b><p>O Censo 2025 registra 9 nas escolas com 8º e 9º ano. A rede pode ter mais, e o número exato depende da lista da Secretaria Municipal de Educação.</p></div>
+      <p class="src">Fonte: INEP, Microdados do Censo Escolar 2025, tabela de docentes (campo QT_DOC_BAS_DISC_LINGUA_ING). A contagem é por escola e não identifica pessoas. Quem atua em mais de uma escola aparece em cada uma, então o número exato de pessoas depende da lista da Secretaria Municipal de Educação.</p>
     </div>
   </div>
 </section>
@@ -494,7 +499,7 @@ G.forEach(g=>{
   const p=el('path',{d:g.d,'stroke':'#fff','stroke-width':3,'stroke-linejoin':'round',tabindex:0,role:'button','aria-label':`${d.n}, ${d.tot} alunos`},map);
   p.addEventListener('click',()=>select(g.cod));
   p.id='d'+g.cod;
-  p.addEventListener('mouseenter',()=>{hov.setAttribute('href','#d'+g.cod);hov.classList.add('on');map.appendChild(hov)});
+  p.addEventListener('mouseenter',()=>{hov.classList.remove('on');hov.setAttribute('href','#d'+g.cod);map.appendChild(hov);void hov.getBoundingClientRect();hov.classList.add('on')});
   p.addEventListener('mouseleave',()=>hov.classList.remove('on'));
   p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(g.cod)}});
   paths[g.cod]=p;
