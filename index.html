@@ -149,6 +149,22 @@ section.tint .tl li{background:#fff}
 .tl li.now b{color:var(--red)}
 .tl p{margin:0}
 
+
+/* linha do tempo visual (vertical) */
+.tl2{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:0}
+.tl2 li{position:relative;padding:0 0 var(--s5) 72px}
+.tl2 li::before{content:"";position:absolute;left:12px;top:0;width:8px;height:100%;background:var(--green-dk)}
+.tl2 li::after{content:"";position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--green-dk);box-shadow:0 0 0 6px #fff}
+.tl2 li.f::before,.tl2 li.f::after{background:var(--wash2)}
+.tl2 li.hoje::after{background:var(--red);left:-4px;top:-2px;width:40px;height:40px}
+.tl2 li:last-child{padding-bottom:0}
+.tl2 li:last-child::before{height:34px}
+.tl2 .d{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--green-dk)}
+.tl2 li.f .d{color:var(--muted)}
+.tl2 li.hoje .d{color:var(--red)}
+.tl2 p{margin:4px 0 0;font-size:17px;color:var(--muted);max-width:52ch}
+.tl2 li.hoje p{color:var(--ink);font-weight:600}
+
 /* pendências */
 .todo{list-style:none;margin:var(--s4) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
 .todo li{padding:var(--s3);background:var(--wash)}
@@ -159,9 +175,9 @@ ul.fontes{padding-left:var(--s3);margin:var(--s4) 0 0;max-width:var(--measure)}
 ul.fontes li{margin-bottom:var(--s1)}
 
 footer{background:var(--wash);padding:var(--s6) 0;font-size:14px;color:var(--muted)}
-.insts{display:flex;align-items:center;gap:var(--s6);flex-wrap:wrap;margin-top:var(--s5);padding-top:var(--s5)}
-.insts img{display:block;height:64px;width:auto}
-.insts-title{margin-top:var(--s5);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.insts{display:flex;align-items:center;justify-content:center;gap:var(--s7);flex-wrap:wrap;margin-top:var(--s4)}
+.insts img{display:block;height:120px;width:auto;max-width:100%}
+.insts-title{margin-top:var(--s6);text-align:center;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--s6);align-items:center}
 footer .wrap+.wrap{display:block}
 footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
@@ -192,7 +208,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="logo" viewBox="0 0 1280 440">
-      <path d="M84 60H206A44 44 0 0 1 250 104V206A44 44 0 0 1 206 250H134L84 296V250A44 44 0 0 1 40 206V104A44 44 0 0 1 84 60Z" fill="#1f7a30"/>
+      <path d="M84 60H206A44 44 0 0 1 250 104V206A44 44 0 0 1 206 250V296L156 250H84A44 44 0 0 1 40 206V104A44 44 0 0 1 84 60Z" fill="#1f7a30"/>
       <text x="145" y="198" font-size="124" font-weight="800" text-anchor="middle" fill="#fff" font-family="Open Sans,sans-serif">A</text>
       <g transform="translate(22 20)">
         <path d="M238 190h92a38 38 0 0 1 38 38v92a38 38 0 0 1-38 38h-32l-46 48v-48h-14a38 38 0 0 1-38-38v-92a38 38 0 0 1 38-38z" fill="#cd191e" stroke="#fff" stroke-width="10" paint-order="stroke"/>
@@ -297,7 +313,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
           <button type="button" data-mode="b" aria-pressed="false">Só 9º ano</button>
         </div>
         <svg id="map" role="group" aria-label="Mapa dos distritos de Alfredo Chaves"></svg>
-        <div class="legend"><span>Menos</span><i style="background:#e3f2e5"></i><i style="background:#c4e5c9"></i><i style="background:#9ad4a3"></i><i style="background:#5dba6b"></i><i style="background:#1f7a30"></i><span>Mais alunos</span></div>
+        <div class="legend"><span>Menos alunos</span><i style="background:#e3f2e5"></i><i style="background:#c4e5c9"></i><i style="background:#9ad4a3"></i><i style="background:#5dba6b"></i><i style="background:#1f7a30"></i><span>Mais alunos</span></div>
         <p class="src" style="margin-top:var(--s2)">Distritos: malha do IBGE (Censo 2022). Passe o mouse ou clique em um distrito para ver o nome e as escolas.</p>
       </div>
       <aside class="panel" id="panel" aria-live="polite"></aside>
@@ -335,15 +351,7 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
     <header><span class="n">05</span><h2>Linha do tempo</h2></header>
     <div>
       <p class="lead rv">Do Preparatec ao fim da bolsa, os marcos que ligam a rede municipal ao Centro de Línguas.</p>
-      <ul class="tl rv">
-        <li><b>2008</b><p>A Prefeitura cria o Preparatec, para preparar alunos da rede municipal para o processo seletivo do Ifes.</p></li>
-        <li><b>2022</b><p>Trabalho sobre vozes decoloniais na literatura de língua inglesa, orientado por Elisa Prado Có, fica em 1º lugar na 10ª Mostra de Ciência, Tecnologia e Inovação (JEPE).</p></li>
-        <li><b>01/12/2025</b><p>Começa a vigência do projeto de implantação do Centro de Línguas.</p></li>
-        <li><b>01/10/2026</b><p>Início do plano do bolsista, com 13 cotas mensais.</p></li>
-        <li class="now"><b>11/10/2026</b><p>A FAPES informa que a bolsa foi implementada.</p></li>
-        <li><b>31/10/2027</b><p>Fim do plano do bolsista e entrega do apoio ao relatório final.</p></li>
-        <li><b>30/11/2027</b><p>Fim da vigência do projeto.</p></li>
-      </ul>
+      <ol class="tl2 rv" id="tl2"></ol>
     </div>
   </div>
 </section>
@@ -371,11 +379,11 @@ footer svg.logo{height:84px;width:auto;aspect-ratio:1280/440;display:block}
 <footer>
   <div class="wrap">
     <svg class="logo" role="img" aria-label="Logo do Centro de Línguas"><use href="#logo"/></svg>
-    <div>Acompanhamento da bolsa de extensão tecnológica no Centro de Línguas do Ifes, sob mentoria da Dra. Elisa Prado Có. Este site não é canal oficial do Ifes, da FAPES nem da Prefeitura. A logo do centro é um rascunho.</div>
+    <div>Acompanhamento da bolsa de extensão tecnológica no Centro de Línguas do Ifes, sob mentoria da Dra. Elisa Prado Có. Este site não é canal oficial do Ifes, da FAPES nem da Prefeitura.</div>
   </div>
   <div class="wrap">
     <div class="insts-title">Instituições citadas neste site</div>
-    <div class="insts"><img src="assets/logo-ifes.svg" alt="Instituto Federal do Espírito Santo" style="height:72px"><img src="assets/logo-prefeitura.png" alt="Prefeitura de Alfredo Chaves, Estado do Espírito Santo"></div>
+    <div class="insts"><img src="assets/logo-ifes.svg" alt="Instituto Federal do Espírito Santo" style="height:140px"><img src="assets/logo-prefeitura.png" alt="Prefeitura de Alfredo Chaves, Estado do Espírito Santo"></div>
   </div>
 </footer>
 
@@ -426,20 +434,19 @@ G.forEach(g=>{
   p.addEventListener('click',()=>select(g.cod));
   p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(g.cod)}});
   paths[g.cod]=p;
-  const t=el('text',{x:g.c[0],y:g.c[1]},map);
-  const v=el('tspan',{x:g.c[0],dy:'12','font-size':'38','font-weight':'800'},t);
   el('title',{},p).textContent=d.n;
-  labs[g.cod]={t,v};
+  labs[g.cod]={};
 });
+function p_title(c,d){paths[c].querySelector('title').textContent=`${d.n}: ${d[mode]} alunos`}
 function paint(){
   const max=Math.max(...Object.values(D).map(d=>d[mode]));
   G.forEach(g=>{const d=D[g.cod],r=d[mode]/max;
     paths[g.cod].setAttribute('fill',g.cod===sel?'#cd191e':shade(r));
     paths[g.cod].setAttribute('stroke','#fff');
     paths[g.cod].setAttribute('stroke-width',3);
-    const w=(g.cod===sel||r>.35)?'#fff':'#0b3d2e';labs[g.cod].t.setAttribute('fill',w);labs[g.cod].v.textContent=d[mode];
+    p_title(g.cod,d);
   });
-  const sp=paths[sel];map.appendChild(sp);Object.values(labs).forEach(l=>map.appendChild(l.t));
+  const sp=paths[sel];map.appendChild(sp);
 }
 function panel(){
   const d=D[sel],tot=d.tot,max=56+56;
@@ -473,6 +480,25 @@ document.getElementById('dots').innerHTML=Array.from({length:240},(_,i)=>`<i cla
   const c=document.getElementById('months');
   c.innerHTML=names.map((m,i)=>{const yr=i<3?'26':'27';const cls=idx>12?'past':i<idx?'past':i===idx?'now':'';return `<div class="${cls}">${m}<small>cota ${i+1}, ${yr}</small></div>`}).join('');
   document.getElementById('monthsnote').textContent=idx<0?'A bolsa começa em outubro de 2026.':idx>12?'Plano da bolsa concluído.':`Hoje estamos na cota ${idx+1} de 13. Faltam ${12-idx} cotas depois desta.`;
+})();
+
+
+/* linha do tempo */
+(()=>{
+  const now=new Date();now.setHours(12,0,0,0);
+  const idx=(now.getFullYear()-2026)*12+(now.getMonth()-9);
+  const f=d=>d.toLocaleDateString('pt-BR');
+  const E=[
+    ['2008-01-01','2008','A Prefeitura cria o Preparatec, para preparar alunos da rede municipal para o processo seletivo do Ifes.'],
+    ['2025-12-01','01/12/2025','Começa a vigência do projeto de implantação do Centro de Línguas.'],
+    ['2026-10-01','01/10/2026','Início do plano do bolsista, com 13 cotas mensais.'],
+    ['2026-10-11','11/10/2026','A FAPES informa que a bolsa foi implementada.'],
+    ['2027-10-31','31/10/2027','Fim do plano do bolsista e apoio ao relatório final.'],
+    ['2027-11-30','30/11/2027','Fim da vigência do projeto.']
+  ].map(e=>({t:new Date(e[0]+'T12:00:00'),d:e[1],p:e[2]}));
+  const hoje={t:now,d:'Hoje',p:idx>=0&&idx<=12?`${f(now)}. Cota ${idx+1} de 13 da bolsa.`:f(now),h:true};
+  const L=[...E,hoje].sort((a,b)=>a.t-b.t);
+  document.getElementById('tl2').innerHTML=L.map(e=>`<li class="${e.h?'hoje':e.t>now?'f':''}"><span class="d">${e.d}</span><p>${e.p}</p></li>`).join('');
 })();
 
 /* contadores, revelação e menu ativo */
